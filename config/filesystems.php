@@ -60,6 +60,18 @@ return [
             'report' => false,
         ],
 
+        'spaces' => [
+            'driver' => 's3',
+            'key' => env('DIGITAL_OCEAN_SPACES_KEY'),
+            'secret' => env('DIGITAL_OCEAN_SPACES_SECRET'),
+            'endpoint' => env('DIGITAL_OCEAN_SPACES_ENDPOINT'),
+            'region' => env('DIGITAL_OCEAN_SPACES_REGION'),
+            'bucket' => env('DIGITAL_OCEAN_SPACES_BUCKET'),
+            'use_path_style_endpoint' => false,
+            'throw' => true,
+            'report' => false,
+        ],
+
     ],
 
     /*
