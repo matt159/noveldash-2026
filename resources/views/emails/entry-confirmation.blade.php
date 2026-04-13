@@ -15,6 +15,10 @@
             Thank you for entering <strong>{{ config('submission.title') }}</strong>. We have received your manuscript and your entry is now confirmed.
         </p>
 
+        <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
+            Your entry ID is <strong>{{ $entry->uid }}</strong>. Please keep this for your records.
+        </p>
+
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
             We will be in touch with the outcome of your submission in due course. Good luck!
         </p>

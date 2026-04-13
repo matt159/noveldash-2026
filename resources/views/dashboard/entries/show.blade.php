@@ -22,6 +22,10 @@
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Entry Details</h2>
                 <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
+                        <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Entry ID</dt>
+                        <dd class="mt-1 text-sm text-gray-900 font-mono">{{ $entry->uid }}</dd>
+                    </div>
+                    <div>
                         <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Name</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ $entry->name }}</dd>
                     </div>

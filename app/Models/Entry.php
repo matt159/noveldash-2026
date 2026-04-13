@@ -9,6 +9,7 @@ use Database\Factories\EntryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Entry extends Model
 {
@@ -16,6 +17,7 @@ class Entry extends Model
     use HasFactory;
 
     protected $fillable = [
+        'uid',
         'name',
         'email',
         'phone',
@@ -40,6 +42,19 @@ class Entry extends Model
         'feedback_sent_at' => 'datetime',
         'manually_confirmed_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Entry $entry) {
+            if (empty($entry->uid)) {
+                do {
+                    $uid = strtoupper(Str::random(8));
+                } while (static::where('uid', $uid)->exists());
+
+                $entry->uid = $uid;
+            }
+        });
+    }
 
     public function sponsorshipCode(): BelongsTo
     {

@@ -11,6 +11,7 @@ use App\Models\SponsorshipCode;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Stripe\StripeClient;
 
@@ -44,9 +45,16 @@ class EntryController extends Controller
             }
         }
 
-        $manuscriptPath = $request->file('manuscript')->store('manuscripts', 'spaces');
+        do {
+            $uid = strtoupper(Str::random(8));
+        } while (Entry::where('uid', $uid)->exists());
+
+        $manuscript = $request->file('manuscript');
+        $manuscriptFilename = $uid.'-'.$manuscript->getClientOriginalName();
+        $manuscriptPath = $manuscript->storeAs('manuscripts', $manuscriptFilename, 'spaces');
 
         $entry = Entry::create([
+            'uid' => $uid,
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
