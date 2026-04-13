@@ -42,7 +42,7 @@
                         <label for="manuscript" class="block text-sm font-medium text-gray-700 mb-1">Manuscript <span class="text-red-500">*</span></label>
                         <input type="file" id="manuscript" name="manuscript" required accept=".pdf,.doc,.docx"
                             class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 file:mr-3 file:rounded file:border-0 file:bg-gray-100 file:px-3 file:py-1 file:text-xs file:font-medium @error('manuscript') border-red-400 @enderror">
-                        <p class="mt-1 text-xs text-gray-500">Accepted formats: PDF, DOC, DOCX. Max 50MB.</p>
+                        <p class="mt-1 text-xs text-gray-500">Accepted formats: PDF, DOC, DOCX. Max 10MB.</p>
                         @error('manuscript')
                             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                         @enderror

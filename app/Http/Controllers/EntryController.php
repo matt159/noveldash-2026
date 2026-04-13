@@ -27,7 +27,7 @@ class EntryController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:50'],
-            'manuscript' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:51200'],
+            'manuscript' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:'.config('submission.manuscript_upload_limit')],
             'sponsorship_code' => ['nullable', 'string', 'max:100'],
         ]);
 

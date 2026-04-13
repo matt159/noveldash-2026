@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Stripe\StripeClient;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class EntryController extends Controller
 {
@@ -69,7 +70,7 @@ class EntryController extends Controller
         return view('dashboard.entries.show', compact('entry', 'stripePayment'));
     }
 
-    public function downloadManuscript(Entry $entry): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function downloadManuscript(Entry $entry): StreamedResponse
     {
         $extension = pathinfo($entry->manuscript_path, PATHINFO_EXTENSION) ?: 'pdf';
 
@@ -105,7 +106,7 @@ class EntryController extends Controller
     public function uploadFeedback(Request $request, Entry $entry): RedirectResponse
     {
         $request->validate([
-            'feedback' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
+            'feedback' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:'.config('submission.feedback_upload_limit')],
         ]);
 
         if ($entry->feedback_path) {
