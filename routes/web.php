@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\Dashboard\EntryController as DashboardEntryController;
+use App\Http\Controllers\Dashboard\RevisionController;
 use App\Http\Controllers\Dashboard\RoundController;
 use App\Http\Controllers\Dashboard\SponsoredPlaceController as DashboardSponsoredPlaceController;
 use App\Http\Controllers\Dashboard\SponsorshipApplicationController as DashboardSponsorshipApplicationController;
@@ -68,4 +69,6 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
     Route::post('/sponsorship-applications/{sponsorshipApplication}/decline', [DashboardSponsorshipApplicationController::class, 'decline'])->name('sponsorship-applications.decline');
 
     Route::get('/sponsored-places', [DashboardSponsoredPlaceController::class, 'index'])->name('sponsored-places.index');
+
+    Route::get('/revisions', [RevisionController::class, 'index'])->name('revisions.index');
 });

@@ -30,6 +30,9 @@
                     <a href="{{ route('dashboard.sponsorship-codes.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.sponsorship-codes.*') ? 'font-medium text-gray-900' : '' }}">Codes ({{ $sponsorshipCodesCount }})</a>
                     <a href="{{ route('dashboard.sponsorship-applications.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.sponsorship-applications.*') ? 'font-medium text-gray-900' : '' }}">Applications ({{ $sponsorshipApplicationsCount }})</a>
                     <a href="{{ route('dashboard.sponsored-places.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.sponsored-places.*') ? 'font-medium text-gray-900' : '' }}">Sponsored Places ({{ $sponsoredPlacesCount }})</a>
+                    @if (auth()->user()?->email === 'matthamilton@live.co.uk')
+                        <a href="{{ route('dashboard.revisions.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.revisions.*') ? 'font-medium text-gray-900' : '' }}">Revisions</a>
+                    @endif
                 </div>
                 <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
