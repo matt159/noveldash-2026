@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Enums\PaymentStatus;
+use App\Models\Concerns\RecordsRevisions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class SponsoredPlace extends Model
 {
+    use RecordsRevisions;
+
     protected $fillable = [
         'name',
         'email',

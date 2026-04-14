@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\EntryRound;
 use App\Enums\EntryRoundStatus;
 use App\Enums\PaymentStatus;
+use App\Models\Concerns\RecordsRevisions;
 use Database\Factories\EntryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,7 @@ use Illuminate\Support\Str;
 class Entry extends Model
 {
     /** @use HasFactory<EntryFactory> */
-    use HasFactory;
+    use HasFactory, RecordsRevisions;
 
     protected $fillable = [
         'uid',

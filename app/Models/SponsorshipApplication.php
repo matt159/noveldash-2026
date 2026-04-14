@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Enums\SponsorshipApplicationStatus;
+use App\Models\Concerns\RecordsRevisions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SponsorshipApplication extends Model
 {
+    use RecordsRevisions;
+
     protected $fillable = [
         'name',
         'email',
