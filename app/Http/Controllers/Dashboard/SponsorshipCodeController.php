@@ -12,7 +12,7 @@ class SponsorshipCodeController extends Controller
 {
     public function index(): View
     {
-        $codes = SponsorshipCode::with('entry')
+        $codes = SponsorshipCode::with(['entry', 'sponsoredPlace'])
             ->latest()
             ->paginate(50);
 

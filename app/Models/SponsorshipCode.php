@@ -15,6 +15,7 @@ class SponsorshipCode extends Model
     protected $fillable = [
         'code',
         'entry_id',
+        'sponsored_place_id',
         'used_at',
     ];
 
@@ -25,6 +26,11 @@ class SponsorshipCode extends Model
     public function entry(): BelongsTo
     {
         return $this->belongsTo(Entry::class);
+    }
+
+    public function sponsoredPlace(): BelongsTo
+    {
+        return $this->belongsTo(SponsoredPlace::class);
     }
 
     public function isUsed(): bool

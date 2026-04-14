@@ -7,9 +7,12 @@ use App\Enums\EntryRoundStatus;
 use App\Enums\PaymentStatus;
 use App\Mail\EntryConfirmationMail;
 use App\Models\Entry;
+use App\Models\SponsoredPlace;
+use App\Models\SponsorshipCode;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Stripe\StripeClient;
 
@@ -23,6 +26,32 @@ class PaymentController extends Controller
             return redirect()->route('entry.create');
         }
 
+        // Check if this is a sponsored place payment
+        $sponsoredPlace = SponsoredPlace::where('stripe_session_id', $sessionId)->first();
+
+        if ($sponsoredPlace) {
+            if ($sponsoredPlace->payment_status === PaymentStatus::Pending) {
+                $stripe = new StripeClient(config('services.stripe.secret'));
+                $session = $stripe->checkout->sessions->retrieve($sessionId);
+
+                if ($session->payment_status === 'paid') {
+                    $sponsoredPlace->update([
+                        'payment_status' => PaymentStatus::Completed,
+                    ]);
+
+                    $code = strtoupper(Str::random(4).'-'.Str::random(4).'-'.Str::random(4));
+
+                    SponsorshipCode::create([
+                        'code' => $code,
+                        'sponsored_place_id' => $sponsoredPlace->id,
+                    ]);
+                }
+            }
+
+            return redirect()->route('sponsored-space.thanks');
+        }
+
+        // Fall through to entry payment handling
         $entry = Entry::where('stripe_session_id', $sessionId)->first();
 
         if (! $entry) {
