@@ -18,6 +18,7 @@
                     <a href="{{ route('dashboard.rounds.show', 'longlist') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->is('dashboard/rounds/longlist') ? 'font-medium text-gray-900' : '' }}">Longlist</a>
                     <a href="{{ route('dashboard.rounds.show', 'shortlist') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->is('dashboard/rounds/shortlist') ? 'font-medium text-gray-900' : '' }}">Shortlist</a>
                     <a href="{{ route('dashboard.sponsorship-codes.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.sponsorship-codes.*') ? 'font-medium text-gray-900' : '' }}">Sponsorship Codes</a>
+                    <a href="{{ route('dashboard.sponsorship-applications.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.sponsorship-applications.*') ? 'font-medium text-gray-900' : '' }}">Sponsorship Applications</a>
                 </div>
                 <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf

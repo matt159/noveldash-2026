@@ -24,11 +24,18 @@ class EntryController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        if ($request->input('genre') === 'Other' && $request->filled('genre_other')) {
+            $request->merge(['genre' => $request->input('genre_other')]);
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required', 'string', 'max:50'],
+            'novel_title' => ['required', 'string', 'max:255'],
+            'genre' => ['required', 'string', 'max:255'],
             'manuscript' => ['required', 'file', 'mimes:pdf,doc,docx', 'max:'.config('submission.manuscript_upload_limit')],
+            'sensitive_subjects' => ['nullable', 'string', 'max:2000'],
             'sponsorship_code' => ['nullable', 'string', 'max:100'],
         ]);
 
@@ -58,6 +65,9 @@ class EntryController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
+            'novel_title' => $validated['novel_title'],
+            'genre' => $validated['genre'],
+            'sensitive_subjects' => $validated['sensitive_subjects'] ?? null,
             'manuscript_path' => $manuscriptPath,
             'sponsorship_code_id' => $sponsorshipCode?->id,
             'payment_status' => PaymentStatus::Pending,

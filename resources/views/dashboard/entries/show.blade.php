@@ -38,6 +38,14 @@
                         <dd class="mt-1 text-sm text-gray-900">{{ $entry->phone }}</dd>
                     </div>
                     <div>
+                        <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Novel Title</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ $entry->novel_title ?? '—' }}</dd>
+                    </div>
+                    <div>
+                        <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Genre</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ $entry->genre ?? '—' }}</dd>
+                    </div>
+                    <div>
                         <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ $entry->created_at->format('d M Y H:i') }}</dd>
                     </div>
@@ -63,6 +71,16 @@
                             <dd class="mt-1 text-sm text-gray-900 font-mono">{{ $entry->sponsorshipCode->code }}</dd>
                         </div>
                     @endif
+                    <div class="sm:col-span-2">
+                        <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Sensitive Subjects</dt>
+                        <dd class="mt-1 text-sm text-gray-900">
+                            @if ($entry->sensitive_subjects)
+                                <span class="block whitespace-pre-wrap">{{ $entry->sensitive_subjects }}</span>
+                            @else
+                                <span class="text-gray-400">None declared</span>
+                            @endif
+                        </dd>
+                    </div>
                 </dl>
             </div>
 
