@@ -3,14 +3,23 @@
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\Dashboard\EntryController as DashboardEntryController;
 use App\Http\Controllers\Dashboard\RoundController;
+use App\Http\Controllers\Dashboard\SponsoredPlaceController as DashboardSponsoredPlaceController;
 use App\Http\Controllers\Dashboard\SponsorshipApplicationController as DashboardSponsorshipApplicationController;
 use App\Http\Controllers\Dashboard\SponsorshipCodeController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\FeedbackDownloadController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SponsoredPlaceController;
 use App\Http\Controllers\SponsorshipApplicationController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Route;
+
+Route::redirect('/', '/dashboard');
+
+// Sponsorship payment
+Route::get('/sponsored-space', [SponsoredPlaceController::class, 'create'])->name('sponsored-space.create');
+Route::post('/sponsored-space', [SponsoredPlaceController::class, 'store'])->name('sponsored-space.store');
+Route::get('/sponsored-space/thanks', [SponsoredPlaceController::class, 'thanks'])->name('sponsored-space.thanks');
 
 // Sponsorship applications
 Route::get('/sponsorship-apply', [SponsorshipApplicationController::class, 'create'])->name('sponsorship.apply');
@@ -57,4 +66,6 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
     Route::get('/sponsorship-applications/{sponsorshipApplication}/download', [DashboardSponsorshipApplicationController::class, 'downloadDocument'])->name('sponsorship-applications.download');
     Route::post('/sponsorship-applications/{sponsorshipApplication}/approve', [DashboardSponsorshipApplicationController::class, 'approve'])->name('sponsorship-applications.approve');
     Route::post('/sponsorship-applications/{sponsorshipApplication}/decline', [DashboardSponsorshipApplicationController::class, 'decline'])->name('sponsorship-applications.decline');
+
+    Route::get('/sponsored-places', [DashboardSponsoredPlaceController::class, 'index'])->name('sponsored-places.index');
 });
