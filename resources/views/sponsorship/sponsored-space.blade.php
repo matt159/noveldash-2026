@@ -3,7 +3,7 @@
         <div class="w-full max-w-xl">
             <div class="text-center mb-8">
                 <h1 class="text-3xl font-bold text-gray-900">{{ config('submission.title') }}</h1>
-                <p class="mt-2 text-gray-600">Pay for a Sponsorship</p>
+                <p class="mt-2 text-gray-600">Pay for a sponsored place</p>
             </div>
 
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
