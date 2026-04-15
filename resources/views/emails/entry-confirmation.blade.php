@@ -12,7 +12,7 @@
         <p style="font-size: 15px; margin: 0 0 16px;">Dear {{ $entry->name }},</p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
-            Thank you for entering <strong>{{ config('submission.title') }}</strong>. We have received your manuscript and your entry is now confirmed.
+            Thank you for entering <strong>{{ config('submission.title') }}</strong>. We cannot wait to read your work.
         </p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
@@ -20,8 +20,40 @@
         </p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
-            We will be in touch with the outcome of your submission in due course. Good luck!
+            <span style="display:block; margin-bottom: 12px;"><strong>Important Dates</strong></span>
+            Our prize opened for entries on {{ \Carbon\Carbon::parse(config('dates.prize_opening_date'))->format('jS F Y') }}.<br/>
+            Our judges will be announced on the {{ config('dates.judges_announcement_date_text') }}.<br/>
+            Our prize closes for entries on {{ \Carbon\Carbon::parse(config('dates.prize_closing_date'))->format('jS F Y') }}.<br/>
+            Our longlist is announced in {{ config('dates.longlist_announcement_date_text') }}<br/>
+            Our Top 100 will be announced shortly after the longlist in {{ config('dates.top_100_announcement_date_text') }}.<br/>
+            Our shortlist is announced in {{ config('dates.shortlist_announcement_date_text') }}<br/>
+            Our winner announcement will be in {{ config('dates.winner_announcement_date_text') }}
         </p>
+
+        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+            <span style="display:block; margin-bottom: 12px;"><strong>Sponsored places</strong></span>
+            <span style="display:block; margin-bottom: 12px;">We realise that the world has gone slightly mad at the moment, but the higher cost of living unfortunately does not qualify for a sponsored entry.</span>
+            <span style="display:block; margin-bottom: 12px;">In order to check the eligibility of our sponsorship places, please check our criteria on our home page on our website.</span>
+        </p>
+
+        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+            <span style="display:block; margin-bottom: 12px;"><strong>Feedback</strong></span>
+            <span style="display:block; margin-bottom: 12px;">We offer at least one paragraph of feedback free of charge for every entry as an addition. Your entry fee is to enter the competition.</span>
+        </p>
+
+        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+            <span style="display:block; margin-bottom: 12px; text-decoration: underline;"><strong>Please note</strong></span>
+            <span style="display:block; margin-bottom: 12px;"><strong>Feedback never goes out until after the winner is announced which is December 2026. Feedback will go out until 28th February 2027. However, we will try to get this out as soon as possible.</strong></span>
+            <span style="display:block; margin-bottom: 12px;"><strong>Because of the high level of entries, we take up to 62 days to send out feedback.</strong></span>
+        </p>
+
+
+        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+            <span style="display:block; margin-bottom: 12px;">All of our feedback is written by hand, and we do not use computerised systems to do this. Please bear with us and please do not email us asking where it is if the winner has not been announced.</span>
+            <span style="display:block; margin-bottom: 12px;">Anyone sending abusive or unkind messages to the CNP team will automatically be disqualified from receiving feedback and f before the longlist announcements disqualified from the competition.</span>
+        </p>
+
+
 
         <p style="font-size: 13px; color: #9ca3af; border-top: 1px solid #f3f4f6; padding-top: 24px; margin: 0;">
             If you have any questions, please do not reply to this email.<br>

@@ -71,4 +71,19 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
     Route::get('/sponsored-places', [DashboardSponsoredPlaceController::class, 'index'])->name('sponsored-places.index');
 
     Route::get('/revisions', [RevisionController::class, 'index'])->name('revisions.index');
+
+
+
+
+});
+
+
+
+Route::middleware(AdminAuth::class)->group(function () {
+
+    Route::get('preview-confirmation-email', function () {
+        $entry = \App\Models\Entry::latest()->first();
+        return view('emails.entry-confirmation', compact('entry'));
+    });
+
 });
