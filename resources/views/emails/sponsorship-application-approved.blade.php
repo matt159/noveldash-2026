@@ -24,7 +24,7 @@
         </div>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
-            Please use this code when completing your entry. <strong>You must enter within 48 hours</strong> or your sponsored place may be cancelled.
+            Please use this code when completing your entry. <a href="{{ config('app.url') }}/regular-entry" target="_blank">Click here to enter</a>
         </p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
