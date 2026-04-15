@@ -132,7 +132,7 @@
 
                     <button type="submit" id="submit-btn" disabled
                         class="w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-semibold text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-gray-900">
-                        Submit Entry &rarr;
+                        Continue to payment &rarr;
                     </button>
 
                     <script>
