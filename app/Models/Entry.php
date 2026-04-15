@@ -10,12 +10,13 @@ use Database\Factories\EntryFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Entry extends Model
 {
     /** @use HasFactory<EntryFactory> */
-    use HasFactory, RecordsRevisions;
+    use HasFactory, RecordsRevisions, SoftDeletes;
 
     protected $fillable = [
         'uid',

@@ -98,6 +98,12 @@
                                         </form>
                                     @endif
                                     <a href="{{ route('dashboard.entries.show', $entry) }}" class="text-sm font-medium text-gray-900 hover:underline">View</a>
+                                    <form action="{{ route('dashboard.entries.destroy', $entry) }}" method="POST"
+                                        onsubmit="return confirm('Delete entry for {{ addslashes($entry->name) }}? This can be undone.')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-sm font-medium text-red-600 hover:underline">Delete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

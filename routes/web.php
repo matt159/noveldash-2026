@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SponsoredPlaceController;
 use App\Http\Controllers\SponsorshipApplicationController;
 use App\Http\Middleware\AdminAuth;
+use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/dashboard');
@@ -56,6 +57,7 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
     Route::post('/entries/{entry}/upload-feedback', [DashboardEntryController::class, 'uploadFeedback'])->name('entries.upload-feedback');
     Route::post('/entries/{entry}/send-feedback', [DashboardEntryController::class, 'sendFeedback'])->name('entries.send-feedback');
     Route::post('/entries/{entry}/confirm-payment', [DashboardEntryController::class, 'confirmPayment'])->name('entries.confirm-payment');
+    Route::delete('/entries/{entry}', [DashboardEntryController::class, 'destroy'])->name('entries.destroy');
 
     Route::get('/rounds/{round}', [RoundController::class, 'show'])->name('rounds.show');
 
@@ -72,17 +74,13 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
 
     Route::get('/revisions', [RevisionController::class, 'index'])->name('revisions.index');
 
-
-
-
 });
-
-
 
 Route::middleware(AdminAuth::class)->group(function () {
 
     Route::get('preview-confirmation-email', function () {
-        $entry = \App\Models\Entry::latest()->first();
+        $entry = Entry::latest()->first();
+
         return view('emails.entry-confirmation', compact('entry'));
     });
 

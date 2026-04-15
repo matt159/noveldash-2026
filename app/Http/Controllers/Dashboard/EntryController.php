@@ -136,4 +136,11 @@ class EntryController extends Controller
 
         return back()->with('success', 'Feedback email sent to '.$entry->email.'.');
     }
+
+    public function destroy(Entry $entry): RedirectResponse
+    {
+        $entry->delete();
+
+        return redirect()->route('dashboard.entries.index')->with('success', 'Entry for '.$entry->name.' has been deleted.');
+    }
 }
