@@ -12,7 +12,7 @@
         <p style="font-size: 15px; margin: 0 0 16px;">Dear {{ $entry->name }},</p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
-            Thank you for submitting to <strong>{{ config('submission.title') }}</strong>. We have reviewed your manuscript and have prepared feedback for you.
+            Thank you for submitting to <strong>{{ config('submission.title') }}</strong>. We have reviewed your entry and have prepared feedback for you.
         </p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
