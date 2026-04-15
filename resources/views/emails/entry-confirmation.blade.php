@@ -15,7 +15,7 @@
             Thank you for entering <strong>{{ config('submission.title') }}</strong>. We cannot wait to read your work.
         </p>
 
-        <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
+        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
             Your entry ID is <strong>{{ $entry->uid }}</strong>. Please keep this for your records.
         </p>
 
@@ -43,7 +43,7 @@
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
             <span style="display:block; margin-bottom: 12px; text-decoration: underline;"><strong>Please note</strong></span>
-            <span style="display:block; margin-bottom: 12px;"><strong>Feedback never goes out until after the winner is announced which is December 2026. Feedback will go out until 28th February 2027. However, we will try to get this out as soon as possible.</strong></span>
+            <span style="display:block; margin-bottom: 12px;"><strong>Feedback never goes out until after the winner is announced which is {{ config('dates.winner_announcement_date_text') }}. Feedback will go out until {{ config('dates.feedback_cutoff_date_text') }}. However, we will try to get this out as soon as possible.</strong></span>
             <span style="display:block; margin-bottom: 12px;"><strong>Because of the high level of entries, we take up to 62 days to send out feedback.</strong></span>
         </p>
 
@@ -56,7 +56,6 @@
 
 
         <p style="font-size: 13px; color: #9ca3af; border-top: 1px solid #f3f4f6; padding-top: 24px; margin: 0;">
-            If you have any questions, please do not reply to this email.<br>
             {{ config('submission.title') }}
         </p>
     </div>

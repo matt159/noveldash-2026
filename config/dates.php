@@ -8,4 +8,5 @@ return [
     'top_100_announcement_date_text' => env('TOP_100_ANNOUNCEMENT_DATE_TEXT'),
     'shortlist_announcement_date_text' => env('SHORTLIST_ANNOUNCEMENT_DATE_TEXT'),
     'winner_announcement_date_text' => env('WINNER_ANNOUNCEMENT_DATE_TEXT'),
+    'feedback_cutoff_date_text' => env('FEEDBACK_CUTOFF_DATE_TEXT'),
 ];
