@@ -3,7 +3,7 @@
         <div class="w-full max-w-xl">
             <div class="text-center mb-8">
                 <h1 class="text-3xl font-bold text-gray-900">{{ config('submission.title') }}</h1>
-                <p class="mt-2 text-gray-600">{{ config('submission.description') }}</p>
+                <p class="mt-2 text-gray-600">Enter your submission details below and continue to the payment page</p>
                 <p class="mt-1 text-sm text-gray-500">Entry fee: £{{ number_format(config('submission.price') / 100, 2) }}</p>
             </div>
 
