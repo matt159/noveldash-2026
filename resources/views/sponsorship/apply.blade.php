@@ -6,6 +6,12 @@
                 <p class="mt-2 text-gray-600">Apply for a Sponsored Place</p>
             </div>
 
+            @if (! $isOpen)
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+                    <p class="text-gray-800 font-semibold text-lg mb-2">Applications are currently closed</p>
+                    <p class="text-gray-500 text-sm">Sponsored place applications open on {{ \Carbon\Carbon::parse(config('dates.prize_opening_date'))->format('j F Y') }} and close on {{ \Carbon\Carbon::parse(config('dates.prize_closing_date'))->format('j F Y') }}.</p>
+                </div>
+            @else
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
                 <form method="POST" action="{{ route('sponsorship.apply.store') }}" enctype="multipart/form-data" class="space-y-5">
                     @csrf
@@ -106,6 +112,7 @@
                     </script>
                 </form>
             </div>
+            @endif
         </div>
     </div>
 </x-layout>

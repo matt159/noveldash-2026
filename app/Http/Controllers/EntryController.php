@@ -8,6 +8,7 @@ use App\Enums\PaymentStatus;
 use App\Mail\EntryConfirmationMail;
 use App\Models\Entry;
 use App\Models\SponsorshipCode;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -17,13 +18,31 @@ use Stripe\StripeClient;
 
 class EntryController extends Controller
 {
+    private function prizeIsOpen(): bool
+    {
+        $opening = config('dates.prize_opening_date');
+        $closing = config('dates.prize_closing_date');
+
+        if (! $opening || ! $closing) {
+            return true;
+        }
+
+        $today = Carbon::today();
+
+        return $today->between(Carbon::parse($opening), Carbon::parse($closing));
+    }
+
     public function create(): View
     {
-        return view('entry.create');
+        return view('entry.create', ['isOpen' => $this->prizeIsOpen()]);
     }
 
     public function store(Request $request): RedirectResponse
     {
+        if (! $this->prizeIsOpen()) {
+            abort(403, 'Entries are currently closed.');
+        }
+
         if ($request->input('genre') === 'Other' && $request->filled('genre_other')) {
             $request->merge(['genre' => $request->input('genre_other')]);
         }

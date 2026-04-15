@@ -4,18 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSponsorshipApplicationRequest;
 use App\Models\SponsorshipApplication;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class SponsorshipApplicationController extends Controller
 {
+    private function prizeIsOpen(): bool
+    {
+        $opening = config('dates.prize_opening_date');
+        $closing = config('dates.prize_closing_date');
+
+        if (! $opening || ! $closing) {
+            return true;
+        }
+
+        $today = Carbon::today();
+
+        return $today->between(Carbon::parse($opening), Carbon::parse($closing));
+    }
+
     public function create(): View
     {
-        return view('sponsorship.apply');
+        return view('sponsorship.apply', ['isOpen' => $this->prizeIsOpen()]);
     }
 
     public function store(StoreSponsorshipApplicationRequest $request): RedirectResponse
     {
+        if (! $this->prizeIsOpen()) {
+            abort(403, 'Applications are currently closed.');
+        }
+
         $validated = $request->validated();
 
         $documentPath = null;
