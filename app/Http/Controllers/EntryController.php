@@ -23,7 +23,7 @@ class EntryController extends Controller
         $opening = config('dates.prize_opening_date');
         $closing = config('dates.prize_closing_date');
 
-        if(request()->has('debug')){
+        if(auth()->check()){
             return true;
         }
 
