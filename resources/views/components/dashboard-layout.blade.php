@@ -32,6 +32,7 @@
                     <a href="{{ route('dashboard.sponsored-places.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.sponsored-places.*') ? 'font-medium text-gray-900' : '' }}">Sponsored Places ({{ $sponsoredPlacesCount }})</a>
                     @if (auth()->user()?->email === 'matthamilton@live.co.uk')
                         <a href="{{ route('dashboard.revisions.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.revisions.*') ? 'font-medium text-gray-900' : '' }}">Revisions</a>
+                        <a href="{{ route('dashboard.log.index') }}" class="text-sm text-gray-600 hover:text-gray-900 {{ request()->routeIs('dashboard.log.*') ? 'font-medium text-gray-900' : '' }}">Log</a>
                     @endif
                 </div>
                 <form action="{{ route('admin.logout') }}" method="POST">

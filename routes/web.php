@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\Dashboard\EntryController as DashboardEntryController;
+use App\Http\Controllers\Dashboard\LogController;
 use App\Http\Controllers\Dashboard\RevisionController;
 use App\Http\Controllers\Dashboard\RoundController;
 use App\Http\Controllers\Dashboard\SponsoredPlaceController as DashboardSponsoredPlaceController;
@@ -73,6 +74,8 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
     Route::get('/sponsored-places', [DashboardSponsoredPlaceController::class, 'index'])->name('sponsored-places.index');
 
     Route::get('/revisions', [RevisionController::class, 'index'])->name('revisions.index');
+
+    Route::get('/log', [LogController::class, 'index'])->name('log.index');
 
 });
 
