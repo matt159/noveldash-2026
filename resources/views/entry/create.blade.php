@@ -120,7 +120,7 @@
                                 'checklist_rules' => 'I have read and understood the Rules of Entry on the Cheshire Novel Prize website.',
                                 'checklist_word_count' => 'My submission consists of the first 5,000 words of my manuscript followed by a 500 word synopsis.',
                                 'checklist_word_doc' => 'I am submitting a Word doc.',
-                                'checklist_line_spacing' => 'All of my text in both my manuscript and synopsis is set with double line spacing.',
+                                'checklist_line_spacing' => 'All of my text in both my manuscript and synopsis is set with 1.5 line spacing.',
                                 'checklist_font' => 'I have used Times New Roman font throughout.',
                                 'checklist_font_size' => 'I have all text set to size 12 font.',
                                 'checklist_feedback' => 'I understand that Cheshire Novel Prize offers feedback as part of the entry fee which is generic feedback with a paragraph of personal feedback and this is not a detailed editorial report.',
