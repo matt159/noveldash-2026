@@ -1,8 +1,29 @@
 <x-dashboard-layout :title="$currentRound->label()">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-bold text-gray-900">{{ $currentRound->label() }}</h1>
-        <span class="text-sm text-gray-500">{{ $entries->count() }} entries</span>
+        <span class="text-sm text-gray-500">{{ $entries->count() }} {{ ($search ?? false) ? 'results' : 'entries' }}</span>
     </div>
+
+    <form method="GET" action="{{ request()->url() }}" class="mb-4">
+        <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+            </div>
+            <input type="text" name="search" value="{{ $search ?? '' }}"
+                placeholder="Search by name, email, novel title, genre or ID…"
+                class="w-full rounded-lg border border-gray-300 py-2 pl-9 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent">
+            @if ($search ?? false)
+                <a href="{{ request()->url() }}"
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </a>
+            @endif
+        </div>
+    </form>
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         @if ($entries->isEmpty())

@@ -23,17 +23,25 @@ class EntryController extends Controller
     public function index(Request $request): View
     {
         $paymentFilter = $request->query('payment');
+        $search = $request->query('search');
 
         $entries = Entry::with('sponsorshipCode')
             ->when($paymentFilter === 'paid', fn ($q) => $q->where('payment_status', PaymentStatus::Completed)->whereNull('manually_confirmed_at'))
             ->when($paymentFilter === 'sponsored', fn ($q) => $q->where('payment_status', PaymentStatus::Sponsored))
             ->when($paymentFilter === 'manually_confirmed', fn ($q) => $q->whereNotNull('manually_confirmed_at'))
             ->when($paymentFilter === 'unconfirmed', fn ($q) => $q->where('payment_status', PaymentStatus::Pending))
+            ->when($search, fn ($q) => $q->where(function ($q) use ($search) {
+                $q->where('id', $search)
+                    ->orWhereRaw('LOWER(name) LIKE ?', ['%'.strtolower($search).'%'])
+                    ->orWhereRaw('LOWER(email) LIKE ?', ['%'.strtolower($search).'%'])
+                    ->orWhereRaw('LOWER(novel_title) LIKE ?', ['%'.strtolower($search).'%'])
+                    ->orWhereRaw('LOWER(genre) LIKE ?', ['%'.strtolower($search).'%']);
+            }))
             ->latest()
             ->paginate(50)
             ->withQueryString();
 
-        return view('dashboard.entries.index', compact('entries', 'paymentFilter'));
+        return view('dashboard.entries.index', compact('entries', 'paymentFilter', 'search'));
     }
 
     public function confirmPayment(Entry $entry): RedirectResponse
