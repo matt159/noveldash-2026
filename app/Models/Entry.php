@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\EntryRound;
 use App\Enums\EntryRoundStatus;
+use App\Enums\Genre;
 use App\Enums\PaymentStatus;
 use App\Models\Concerns\RecordsRevisions;
 use Database\Factories\EntryFactory;
@@ -84,6 +85,11 @@ class Entry extends Model
     public function feedbackWasSent(): bool
     {
         return $this->feedback_sent_at !== null;
+    }
+
+    public function genreBadgeClass(): string
+    {
+        return (Genre::tryFrom($this->genre ?? '') ?? Genre::Other)->badgeClass();
     }
 
     /**
