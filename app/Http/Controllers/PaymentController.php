@@ -81,4 +81,12 @@ class PaymentController extends Controller
     {
         return view('entry.cancel');
     }
+
+
+    function stripeWebhookSuccess(Request $request){
+
+
+
+
+    }
 }

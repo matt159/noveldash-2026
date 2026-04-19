@@ -133,6 +133,8 @@ class EntryController extends Controller
             'cancel_url' => route('payment.cancel'),
             'customer_email' => $entry->email,
             'metadata' => [
+                'source' => 'noveldash',
+                'type' => 'entry',
                 'entry_id' => $entry->id,
             ],
         ]);

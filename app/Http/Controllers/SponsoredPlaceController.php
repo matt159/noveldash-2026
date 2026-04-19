@@ -47,6 +47,8 @@ class SponsoredPlaceController extends Controller
             'cancel_url' => route('payment.cancel'),
             'customer_email' => $place->email,
             'metadata' => [
+                'source' => 'noveldash',
+                'type' => 'sponsored_entry',
                 'sponsored_place_id' => $place->id,
             ],
         ]);

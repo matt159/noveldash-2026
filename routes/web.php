@@ -37,6 +37,7 @@ Route::get('/entry/success', [EntryController::class, 'success'])->name('entry.s
 // Stripe payment callbacks
 Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+Route::get('/stripe/payment-success-webhook', [PaymentController::class, 'stripeWebhookSuccess'])->name('payment.stripe-webhook-success');
 
 // Feedback download (public, token-gated)
 Route::get('/feedback/{token}', [FeedbackDownloadController::class, 'download'])->name('feedback.download');
