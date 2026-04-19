@@ -115,6 +115,13 @@ class EntryController extends Controller
 
         $stripe = new StripeClient(config('services.stripe.secret'));
 
+
+        if(auth()->user()?->email === 'matthamilton@live.co.uk'){
+            $price = 50;
+        }else{
+            $price = config('submission.price');
+        }
+
         $session = $stripe->checkout->sessions->create([
             'payment_method_types' => ['card'],
             'line_items' => [[
@@ -124,7 +131,7 @@ class EntryController extends Controller
                         'name' => config('submission.title'),
                         'description' => config('submission.description'),
                     ],
-                    'unit_amount' => config('submission.price'),
+                    'unit_amount' => $price,
                 ],
                 'quantity' => 1,
             ]],
