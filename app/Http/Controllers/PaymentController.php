@@ -9,6 +9,7 @@ use App\Mail\EntryConfirmationMail;
 use App\Models\Entry;
 use App\Models\SponsoredPlace;
 use App\Models\SponsorshipCode;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -82,11 +83,53 @@ class PaymentController extends Controller
         return view('entry.cancel');
     }
 
+    public function stripeWebhookSuccess(Request $request): JsonResponse
+    {
+        $stripe = new StripeClient(config('services.stripe.secret'));
+        $event = $stripe->events->retrieve($request->input('event_id'));
+        $session = $event->data->object;
+        $metadata = $session->metadata;
 
-    function stripeWebhookSuccess(Request $request){
+        if (($metadata->source ?? null) !== 'noveldash') {
+            return response()->json(['status' => 'ignored'], 200);
+        }
 
+        $type = $metadata->type ?? null;
 
+        if ($type === 'entry') {
+            $entry = Entry::where('stripe_session_id', $session->id)->first();
 
+            if (! $entry || $entry->payment_status === PaymentStatus::Completed) {
+                return response()->json(['status' => 'ok'], 200);
+            }
 
+            $entry->update([
+                'payment_status' => PaymentStatus::Completed,
+                'stripe_payment_intent_id' => $session->payment_intent,
+                'current_round' => EntryRound::Round1,
+                'round_status' => EntryRoundStatus::Active,
+            ]);
+
+            Mail::to($entry->email)->send(new EntryConfirmationMail($entry));
+        } elseif ($type === 'sponsored_place') {
+            $sponsoredPlace = SponsoredPlace::where('stripe_session_id', $session->id)->first();
+
+            if (! $sponsoredPlace || $sponsoredPlace->payment_status === PaymentStatus::Completed) {
+                return response()->json(['status' => 'ok'], 200);
+            }
+
+            $sponsoredPlace->update([
+                'payment_status' => PaymentStatus::Completed,
+            ]);
+
+            $code = strtoupper(Str::random(4).'-'.Str::random(4).'-'.Str::random(4));
+
+            SponsorshipCode::create([
+                'code' => $code,
+                'sponsored_place_id' => $sponsoredPlace->id,
+            ]);
+        }
+
+        return response()->json(['status' => 'ok'], 200);
     }
 }
