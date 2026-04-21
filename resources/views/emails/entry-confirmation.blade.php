@@ -9,7 +9,7 @@
         <h1 style="font-size: 22px; font-weight: 700; margin: 0 0 8px;">{{ config('submission.title') }}</h1>
         <p style="font-size: 14px; color: #6b7280; margin: 0 0 32px;">Entry confirmation</p>
 
-        <p style="font-size: 15px; margin: 0 0 16px;">Dear {{ $entry->name }},</p>
+        <p style="font-size: 15px; margin: 0 0 16px; color: #374151;">Dear {{ $entry->name }},</p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 16px;">
             Thank you for entering <strong>{{ config('submission.title') }}</strong>. We cannot wait to read your work.
@@ -21,36 +21,57 @@
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
             <span style="display:block; margin-bottom: 12px;"><strong>Important Dates</strong></span>
-            Our prize opened for entries on {{ \Carbon\Carbon::parse(config('dates.prize_opening_date'))->format('jS F Y') }}.<br/>
-            Our judges will be announced on the {{ config('dates.judges_announcement_date_text') }}.<br/>
-            Our prize closes for entries on {{ \Carbon\Carbon::parse(config('dates.prize_closing_date'))->format('jS F Y') }}.<br/>
-            Our longlist is announced in {{ config('dates.longlist_announcement_date_text') }}<br/>
-            Our Top 100 will be announced shortly after the longlist in {{ config('dates.top_100_announcement_date_text') }}.<br/>
-            Our shortlist is announced in {{ config('dates.shortlist_announcement_date_text') }}<br/>
-            Our winner announcement will be in {{ config('dates.winner_announcement_date_text') }}
+            Entries opened: {{ \Carbon\Carbon::parse(config('dates.prize_opening_date'))->format('jS F Y') }}.<br/>
+            <!-- Our judges will be announced on the {{ config('dates.judges_announcement_date_text') }}.<br/> -->
+            Entries close: {{ \Carbon\Carbon::parse(config('dates.prize_closing_date'))->format('jS F Y') }}.<br/>
+            Longlist announced: {{ config('dates.longlist_announcement_date_text') }}<br/>
+            Top 100 announced: {{ config('dates.top_100_announcement_date_text') }}.<br/>
+            Shortlist announced: {{ config('dates.shortlist_announcement_date_text') }}<br/>
+            Winner announced: {{ config('dates.winner_announcement_date_text') }}
         </p>
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
             <span style="display:block; margin-bottom: 12px;"><strong>Sponsored places</strong></span>
-            <span style="display:block; margin-bottom: 12px;">We realise that the world has gone slightly mad at the moment, but the higher cost of living unfortunately does not qualify for a sponsored entry.</span>
-            <span style="display:block; margin-bottom: 12px;">In order to check the eligibility of our sponsorship places, please check our criteria on our home page on our website.</span>
+            <span style="display:block; margin-bottom: 12px;">We know times are tough, but unfortunately the general rise in the cost of living doesn’t qualify for a sponsored entry.</span>
+            <span style="display:block; margin-bottom: 12px;">Each year, we offer over 300 sponsored places for writers who meet our criteria, helping under-represented voices enter free of charge. Around 1% of these places are funded by writers themselves, with the remainder supported personally by Sara Naidine Cox and through our summer school courses.</span>
+            <span style="display:block; margin-bottom: 12px;">To check if you’re eligible, please visit the criteria on our website: <a href="https://www.cheshirenovelprize.com" target="_blank">www.cheshirenovelprize.com</a></span>
+            <span style="display:block; margin-bottom: 12px;">The sponsored entry portal closes at <strong>{{ config('dates.sponsored_entry_closing_date_text') }}</strong>. Applications submitted after this time won’t be considered, so please make sure you apply well in advance.</span>
         </p>
 
-        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+        <p style="font-size: 15px; color: #374151; margin: 0 0 20px;">
             <span style="display:block; margin-bottom: 12px;"><strong>Feedback</strong></span>
-            <span style="display:block; margin-bottom: 12px;">We offer at least one paragraph of feedback free of charge for every entry as an addition. Your entry fee is to enter the competition.</span>
+            <span style="display:block; margin-bottom: 12px;">Every entry receives at least one paragraph of personalised feedback at no extra cost, along with clearly labelled generic feedback. Your entry fee is for entering the competition.</span>
+            <span style="display:block; margin-bottom: 12px;">Feedback is sent out after the winner is announced in <strong>{{ config('dates.winner_announcement_date_text') }}</strong>, and will continue to be distributed until <strong>{{ config('dates.feedback_cutoff_date_text') }}</strong>. We aim to send it as soon as possible, but due to the volume of entries and the care taken with each response, it can take up to 62 days.</span>
+            <span style="display:block; margin-bottom: 12px;">All feedback is written by hand—no automated systems—so we really appreciate your patience. Please don’t email us to ask about feedback before the winner has been announced; we promise it’s on its way.</span>
+            <span style="display:block; margin-bottom: 12px;">If you haven’t received your feedback by 28th February 2027:</span>
         </p>
+        <ul style="font-size: 15px; display:block; margin-bottom: 32px; color: #374151;">
+            <li>First, please check your junk folder it often ends up there</li>
+            <li>If it’s not there, email us with the name of your novel</li>
+        </ul>
 
-        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+        <p style="font-size: 15px; color: #374151; margin: 0 0 20px;">
             <span style="display:block; margin-bottom: 12px; text-decoration: underline;"><strong>Please note</strong></span>
-            <span style="display:block; margin-bottom: 12px;"><strong>Feedback never goes out until after the winner is announced which is {{ config('dates.winner_announcement_date_text') }}. Feedback will go out until {{ config('dates.feedback_cutoff_date_text') }}. However, we will try to get this out as soon as possible.</strong></span>
-            <span style="display:block; margin-bottom: 12px;"><strong>Because of the high level of entries, we take up to 62 days to send out feedback.</strong></span>
         </p>
+        <ul style="font-size: 15px; display:block; margin-bottom: 50px; color: #374151;">
+            <li>The dashboard is cleared on {{ config('dates.dashboard_cleared_date_text') }}</li>
+            <li>After this date, we won’t be able to retrieve your feedback</li>
+            <li>All entries are deleted in line with GDPR to ensure we don’t store your data longer than necessary</li>
+        </ul>
 
 
         <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
-            <span style="display:block; margin-bottom: 12px;">All of our feedback is written by hand, and we do not use computerised systems to do this. Please bear with us and please do not email us asking where it is if the winner has not been announced.</span>
-            <span style="display:block; margin-bottom: 12px;">Anyone sending abusive or unkind messages to the CNP team will automatically be disqualified from receiving feedback and f before the longlist announcements disqualified from the competition.</span>
+            <span style="display:block; margin-bottom: 24px;">Thank you so much for entering the prize. Wishing you the very best of luck, and thank you for trusting us with your work.</span>
+            <span style="display:block; margin-bottom: 12px;">Kind regards,<br/>Sara Cox</span>
+            <span style="display:block; margin-bottom: 12px;">Founder, Cheshire Novel Prize<br/><a href="https://www.cheshirenovelprize.com" target="_blank">www.cheshirenovelprize.com</a></span>
+        </p>
+
+        <p style="font-size: 15px; color: #374151; margin: 0 0 32px;">
+            <span style="display:block; margin-bottom: 12px;">
+                Have you listened to our Tortured Writers Podcast?<br/>
+                <a href="https://podcasts.apple.com/gb/podcast/the-tortured-writers-podcast/id1850575482" target="_blank">https://podcasts.apple.com/gb/podcast/the-tortured-writers-podcast/id1850575482</a>
+            </span>
+            <span style="display:block; margin-bottom: 12px;">It’s also available wherever you get your podcasts, with a new season coming soon.</span>
         </p>
 
 
