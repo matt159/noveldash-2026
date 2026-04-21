@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\EntryRound;
 use App\Enums\EntryRoundStatus;
+use App\Enums\Genre;
 use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
 use App\Mail\FeedbackNotificationMail;
@@ -143,6 +144,17 @@ class EntryController extends Controller
         $entry->update(['feedback_sent_at' => now()]);
 
         return back()->with('success', 'Feedback email sent to '.$entry->email.'.');
+    }
+
+    public function updateGenre(Request $request, Entry $entry): RedirectResponse
+    {
+        $validated = $request->validate([
+            'genre' => ['required', 'string', 'in:'.implode(',', array_column(Genre::cases(), 'value'))],
+        ]);
+
+        $entry->update(['genre' => $validated['genre']]);
+
+        return back()->with('success', 'Genre updated to '.$validated['genre'].'.');
     }
 
     public function destroy(Entry $entry): RedirectResponse

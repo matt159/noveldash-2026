@@ -59,6 +59,7 @@ Route::middleware(AdminAuth::class)->prefix('dashboard')->name('dashboard.')->gr
     Route::post('/entries/{entry}/upload-feedback', [DashboardEntryController::class, 'uploadFeedback'])->name('entries.upload-feedback');
     Route::post('/entries/{entry}/send-feedback', [DashboardEntryController::class, 'sendFeedback'])->name('entries.send-feedback');
     Route::post('/entries/{entry}/confirm-payment', [DashboardEntryController::class, 'confirmPayment'])->name('entries.confirm-payment');
+    Route::patch('/entries/{entry}/genre', [DashboardEntryController::class, 'updateGenre'])->name('entries.update-genre');
     Route::delete('/entries/{entry}', [DashboardEntryController::class, 'destroy'])->name('entries.destroy');
 
     Route::get('/rounds/{round}', [RoundController::class, 'show'])->name('rounds.show');

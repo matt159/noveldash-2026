@@ -43,7 +43,21 @@
                     </div>
                     <div>
                         <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Genre</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ $entry->genre ?? '—' }}</dd>
+                        <dd class="mt-1">
+                            <form action="{{ route('dashboard.entries.update-genre', $entry) }}" method="POST" class="flex items-center gap-2">
+                                @csrf
+                                @method('PATCH')
+                                <select name="genre" class="rounded-lg border border-gray-300 px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+                                    @foreach (\App\Enums\Genre::cases() as $genre)
+                                        <option value="{{ $genre->value }}" @selected($entry->genre === $genre->value)>{{ $genre->value }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit" class="rounded-lg bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-700 transition-colors">Save</button>
+                            </form>
+                            @error('genre')
+                                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            @enderror
+                        </dd>
                     </div>
                     <div>
                         <dt class="text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted</dt>
